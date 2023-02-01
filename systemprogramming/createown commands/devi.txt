@@ -1,0 +1,48 @@
+//...........................copy command..........................//
+
+#include<stdio_ext.h>
+#include<unistd.h>
+#include<stdlib.h>
+#include<fcntl.h>
+#include<string.h>
+#include<sys/wait.h>
+void main()
+{
+	int fd,fd1,ret;
+	char src[30];
+	char buf[1000];
+	char dst[30];
+	printf("enter the source file\n");
+	scanf("%s",src);
+	__fpurge(stdin);
+	printf("enter the destination file\n");
+	scanf("%s",dst);
+	fd=open(src,O_RDONLY);
+	printf("%d\n",fd);
+	if(fd<0)
+	{
+		printf("cp:cannot stat '%s':no such file or directory\n",src);
+		exit(1);
+	}
+	fd1=open(dst,O_RDONLY);
+	printf("%d\n",fd);
+	if(fd1<0)
+	{
+		fd1=open(dst,O_CREAT|O_TRUNC|O_RDWR,0777);
+		printf("%d\n",fd1);
+	}
+	ret=read(fd,buf,999);
+	if(ret<0)
+	{
+		printf("failed to read\n");
+	}
+	ret=write(fd1,buf,strlen(buf));
+	if(ret<0)
+	{
+		printf("failed to write\n");
+	}
+	close(fd);
+	close(fd1);
+	
+}
+

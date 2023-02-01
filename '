@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int  *ascii_int(char *);
+//int *ascendi:ng-order(int *);
+//int *descending-order(int *);
+//int *palindrome(char *);
+void main(int argc,char *argv[])
+{
+	int *iptr;
+	int i,j;
+	if(argc>2)
+	{
+		if((argv[1][0]='-')&&(argv[1][2]='\0'))
+		{
+			iptr=(int *)malloc((argc-2)*sizeof(int));
+			for(i=2,j=0;(i<argc);i++,j++)
+			{
+				iptr[j]=ascii_int(argv[i]);
+			}
+			switch(argv[1][1])
+			{
+			case 'a':for(i=0;i<argc-2;i++)
+			         {
+				       ascii_int(iptr[i]);
+				 }
+			         break;
+			/*case 'b':for(i=0;i<argc-2;i++)
+				 {
+					 ascending_order(iptr[i]);
+				 }
+				 break;
+			case 'c':for(i=0;i<argc-2;i++)
+				 {
+					 descending(iptr[i]);
+				 }
+				 break;
+			case 'd':for(i=0;i<argc-2;i++)
+				 {
+					 palindrome(iptr[i]);
+				 }
+				 break;*/
+			//case 'h':printf("menu\n1.ascii_int\n2.ascending_order\n3.descending_order\n4.palindrome\n");
+			}
+		}
+		else
+		{
+			printf("ivalid option");
+			exit(2);
+		}
+	}
+		else
+		{
+			printf("there is no inputs for operaton\n");
+			exit(1);
+		}
+	
+}
+
+int ascii_int(char *src)
+{
+	int i,sum=0,temp;
+	char src;
+	if(src==NULL)
+		return -1;
+	for(i=0;src[i]!='\0';i++)
+	{
+		if((src[i]>='0')&&(src[i]<='9'))
+		{
+			temp=src[i]-48;
+			sum=sum*10+temp;
+		}
+	}
+	return sum;
+}
